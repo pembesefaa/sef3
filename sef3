@@ -1,0 +1,38 @@
+
+#with minmax scale : entropy
+dtc1=DecisionTreeClassifier(criterion="entropy")
+dtc1.fit(m_x_train,y_train)
+pred2=dtc1.predict(m_x_test)
+confusion_matrix(y_test,pred2)
+as2=accuracy_score(y_test,pred2)
+ps2=precision_score(y_test,pred2)
+rs2=recall_score(y_test,pred2)
+fs2=f1_score(y_test,pred2)
+plot_roc_curve(dtc1,m_x_test,pred2)
+entropy_minmax=[as2,ps2,rs2,fs2]
+
+#with standart scaler : entropy
+dtc2=DecisionTreeClassifier(criterion="entropy")
+dtc2.fit(s_x_train,y_train)
+pred3=dtc2.predict(s_x_test)
+confusion_matrix(y_test,pred3)
+as3=accuracy_score(y_test,pred3)
+ps3=precision_score(y_test,pred3)
+rs3=recall_score(y_test,pred3)
+fs3=f1_score(y_test,pred3)
+plot_roc_curve(dtc2,s_x_test,pred2)
+entropy_standart=[as3,ps3,rs3,fs3]
+
+
+
+def decision_try_gini(x1,y1,x2,y2):
+    dtc_f=DecisionTreeClassifier()
+    dtc_f.fit(x1,y1)
+    pred_f=dtc_f.predict(x2)
+    confusion_matrix(y2, pred_f)
+    a = accuracy_score(y2, pred_f)
+    p = precision_score(y2, pred_f)
+    r = recall_score(y2, pred_f)
+    f = f1_score(y2, pred_f)
+    plot_roc_curve(dtc_f, x2, pred_f)
+    return [a,p,r,f]
